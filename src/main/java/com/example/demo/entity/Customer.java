@@ -3,7 +3,7 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "customer")
+@Table(name = "customer_table")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,8 +12,8 @@ public class Customer {
     @Column
     String name;
 
-    @Embedded
-    Address address;
+    @Column
+    String email;
 
     public int getId() {
         return id;
@@ -31,20 +31,20 @@ public class Customer {
         this.name = name;
     }
 
-    public Address getAddress() {
-        return address;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
     public String toString() {
         return "Customer{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", address=" + address +
+                ", customerName='" + name + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }
