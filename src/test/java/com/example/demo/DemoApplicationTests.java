@@ -2,9 +2,11 @@ package com.example.demo;
 
 import com.example.demo.entity.Customer;
 import com.example.demo.repsoitory.CustomerRepository;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,19 +43,14 @@ class DemoApplicationTests {
 	}
 
 	@Test
-	void findCustomerByEmailAndName(){
-		Customer gojoSatoru = customerRepository.findByEmailAndName("jjk@gmail.com", "Gojo Satoru");
-		System.out.println(gojoSatoru);
+	@Transactional
+	@Rollback(value = false)
+	void updateCustomerEmailById(){
+		customerRepository.updateCustomerEmailById(52,"apss@gmail.com");
 	}
 
 	@Test
-	void findCustomerByEmailLike(){
-		Customer byEmailLike = customerRepository.findByEmailLike("abc%");
-		System.out.println(byEmailLike);
-	}
-
-	@Test
-	void findCustomerByIdIn(){
-		System.out.println(customerRepository.findByIdIn(Arrays.asList(1,2,3,54)));
+	void findCustomerByEmail(){
+		System.out.println(customerRepository.findByEmail("apss@gmail.com"));
 	}
 }
