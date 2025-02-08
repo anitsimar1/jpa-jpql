@@ -31,8 +31,12 @@ class DemoApplicationTests {
 		Customer customer2 = new Customer();
 		customer2.setName("Gojo Satoru");
 		customer2.setEmail("jjk@gmail.com");
-
 		customerRepository.save(customer2);
+
+		Customer customer3 = new Customer();
+		customer3.setName("Baki Hanma");
+		customer3.setEmail("baki%^#Grappler@gmail.com");
+		customerRepository.save(customer3);
 	}
 
 	@Test
