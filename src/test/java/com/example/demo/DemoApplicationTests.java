@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,35 +41,19 @@ class DemoApplicationTests {
 	}
 
 	@Test
-	void readAllData(){
-		List<Customer> all = customerRepository.findAll();
-		all.forEach(System.out::println);
+	void findCustomerByEmailAndName(){
+		Customer gojoSatoru = customerRepository.findByEmailAndName("jjk@gmail.com", "Gojo Satoru");
+		System.out.println(gojoSatoru);
 	}
 
 	@Test
-	void readDataForId(){
-		Optional<Customer> customer = customerRepository.findById(1);
-		if(customer.isPresent()) {
-			System.out.println(customer.get());
-		} else{
-			System.out.println("Empty Customer");
-		}
+	void findCustomerByEmailLike(){
+		Customer byEmailLike = customerRepository.findByEmailLike("abc%");
+		System.out.println(byEmailLike);
 	}
 
 	@Test
-	void update(){
-		Customer customer = customerRepository.findByNameLike("%Amrit%");
-		customer.setName("Amrit Singh");
-		customerRepository.save(customer);
-	}
-
-	@Test
-	void delete(){
-		customerRepository.deleteById(1);
-	}
-
-	@Test
-	void deleteAll(){
-		customerRepository.deleteAll();
+	void findCustomerByIdIn(){
+		System.out.println(customerRepository.findByIdIn(Arrays.asList(1,2,3,54)));
 	}
 }
